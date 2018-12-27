@@ -7,6 +7,13 @@ This uses the stock containers for kolide/fleet, mysql:latest, and redis:alpine 
 
 **Warning:** This has not been tested in a production deployment (yet!).
 
+### Dependencies
+```bash
+bash
+docker
+docker-compose
+```
+
 ### Quick start
 ```bash
 git clone https://github.com/landonc/easy-kolide-fleet.git
