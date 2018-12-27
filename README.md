@@ -1,7 +1,7 @@
 # Easy Kolide Fleet
 Easy docker-compose deployment of Kolide Fleet (https://kolide.com/fleet) for osquery centralized management
 
-To simplify the turn up I also created a simple setup.sh bash script to generate the self signed ssl certificate and create the .env files utilized in the docker-compose.yml to tie all the services together and quickly turn up new kolide fleet deployments.
+To simplify the turn up I also created a basic setup.sh bash script to create the necessary directories, generate the self signed ssl certificate, and create the .env files based on user input.  The .env files are utilized in the docker-compose.yml to tie all the services together and quickly turn up new kolide fleet deployments.
 
 This uses the stock containers for kolide/fleet, mysql:latest, and redis:alpine to create an instant Kolide fleet deployment.
 
