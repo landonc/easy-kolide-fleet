@@ -1,0 +1,37 @@
+version: '2.1'
+
+services:
+  mysql:
+    image: mysql:latest
+    volumes:
+      - ./mysql_data:/var/lib/mysql
+    restart: always
+    env_file:
+      - mysql.env
+
+  redis:
+    image: redis:alpine
+    restart: always
+    env_file:
+      - redis.env
+    # start redis secured with a password even though the ports aren't exposed outside this deployment (passed in redis.env file)
+    command: redis-server --requirepass $$REDIS_PASSWORD
+
+  fleet:
+    image: kolide/fleet
+    # expose kolide fleet on 443
+    ports:
+      - "443:443"
+    # override the entrypoint to always prepare the database and then serve.
+    # default was fleet serve but failed because the database isn't initialized on first boot (and possibly upgrades)
+    entrypoint: /bin/sh -c 'fleet prepare db && fleet serve'
+    restart: always
+    volumes:
+      - ./fleet_tmp:/tmp
+    env_file:
+      - fleet.env
+    depends_on:
+      mysql:
+        condition: service_started
+      redis:
+        condition: service_started
