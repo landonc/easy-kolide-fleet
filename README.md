@@ -26,7 +26,7 @@ It takes about 2min to initialize the database and start all the containers the 
 
 ### Overview of running folder structure
 ```bash
-kolide-fleet-docker
+easy-kolide-fleet
 ├── docker-compose.yml
 ├── fleet.env # created by setup.sh
 ├── fleet_tmp # created by setup.sh
