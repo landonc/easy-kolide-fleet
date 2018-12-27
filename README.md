@@ -1,14 +1,16 @@
-# kolide-fleet-docker
-Easy docker-compose deployment of Kolide Fleet for osquery centralized management
+# Easy Kolide Fleet
+Easy docker-compose deployment of Kolide Fleet (https://kolide.com/fleet) for osquery centralized management
 
-After spending time working with the different options that already existed to quickly turn up a kolide fleet deployment using docker I found it was easier to work out all the kinks and build a docker-compose deployment.  To simplify the turn up I also created a simple setup.sh bash script to generate the self signed ssl certificate and create the .env files utilized in the docker-compose.yml.
+To simplify the turn up I also created a simple setup.sh bash script to generate the self signed ssl certificate and create the .env files utilized in the docker-compose.yml to tie all the services together and quickly turn up new kolide fleet deployments.
 
-This uses the stock containers for kolide/fleet, mysql:latest, and redis:alpine to create an instant Kolide fleet deployment.  This has not been tested at scale but the immediate components that should easily scale are redis and kolide/fleet.
+This uses the stock containers for kolide/fleet, mysql:latest, and redis:alpine to create an instant Kolide fleet deployment.
+
+**Warning:** This has not been tested in a production deployment (yet!).
 
 ### Quick start
 ```bash
-git clone CLONEURLHERE
-cd kolide-fleet-docker
+git clone https://github.com/landonc/easy-kolide-fleet.git
+cd easy-kolide-fleet
 bash setup.sh
 sudo docker-compose up
 ```
@@ -20,16 +22,16 @@ kolide-fleet-docker
 ├── fleet.env # created by setup.sh
 ├── fleet_tmp # created by setup.sh
 │   ├── osquery_result # created by fleet for results of scheduled queries, should be log forwarded
-│   ├── osquery_status
-│   ├── server.cert # created by setup.sh
-│   └── server.key # created by setup.sh
+│   ├── osquery_status # created by fleet
+│   ├── server.cert # created by setup.sh for osquery and kolide fleet website
+│   └── server.key # created by setup.sh for osquery and kolide fleet website
 ├── mysql_data # created by setup.sh
 │   ├── # lots of files/folders created by the mysql container
 ├── mysql.env # created by setup.sh
 └── setup.sh
 ```
 
-To keep from unnecessaryily passing all environment variables to all containers with a single .env or having to modify them in docker-compose.yml I am using separate .env files for each service/container.  The .env files are created via setup.sh, if you would like to manually create them, here are examples of the contents.
+To keep from passing all environment variables to all containers with a single .env or having to manage them in the docker-compose.yml I am using separate .env files for each service/container.  The .env files are created via setup.sh, if you would like to manually create them, here are examples of the contents.
 
 ### redis.env contents
 ```bash
