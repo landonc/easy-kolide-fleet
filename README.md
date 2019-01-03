@@ -22,7 +22,7 @@ bash setup.sh
 sudo docker-compose up -d
 ```
 
-It takes about 1 minute to initialize the database and start all the containers the first time.  Once the fleet container is started you can access the fleet web interface at https://yourdockerserver/ and go through the setup process.
+It takes about 1 minute to initialize the database and start all the containers the first time.  Once the fleet container is started you can access the fleet web interface at https://yourdockerserver/ and go through the fleet setup process.
 
 ### Overview of running folder structure
 ```bash
